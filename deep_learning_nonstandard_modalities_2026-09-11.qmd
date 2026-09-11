@@ -38,6 +38,10 @@ The project spans four main arcs:
 3. **Reframing sound as vision** — Convert raw audio waveforms into mel spectrograms and fine-tune a pretrained ConvNeXt model for 10-class urban sound classification, comparing three fine-tuning paradigms.
 4. **Fine-tuning a language model** — Adapt Qwen2.5-0.5B for multiple-choice QA with LoRA and partial fine-tuning, then use a properly-sized held-out test to weigh task transfer, **catastrophic forgetting**, and how fine-tuning stacks up against **in-context learning**.
 
+::: {.callout-important title="Headline result"}
+On a **169-question hidden test**, the base Qwen2.5-0.5B model given **four worked examples in its prompt scored 0.423 — beating supervised fine-tuning (0.340)** with no weight updates at all. Neither LoRA nor partial fine-tuning caused catastrophic forgetting. A 25-question local gauge had pointed the opposite way, which is why the properly sized held-out test matters. Details in [The decisive test](#the-decisive-test-169-hidden-questions).
+:::
+
 ---
 
 ## Setup
@@ -870,6 +874,8 @@ def train_image_classifier(model, optimizer, criterion, device, num_epochs,
 ## Part 5: Instruction Fine-Tuning an LLM — Task Gains vs. Catastrophic Forgetting
 
 The previous parts adapted pretrained *encoders* to new modalities. This final part turns to a *generative* language model and asks a sharper question about the cost of adaptation: **when we fine-tune a small instruction-tuned LLM to do better on a target task, how much of its general ability do we destroy in the process?** This tension — task gain versus **catastrophic forgetting** — is central to practical LLM fine-tuning.
+
+**The short answer:** fine-tuning did not cause forgetting — but it also wasn't the best way to adapt this model. On a 169-question hidden test, simply placing four solved examples in the prompt (0.423) beat supervised fine-tuning (0.340).
 
 The model is **Qwen2.5-0.5B-Instruct**, a 0.5-billion-parameter chat model. The target is CS189-style machine-learning multiple-choice questions; the training signal is a broad slice of **MMLU** (Massive Multitask Language Understanding). Everything below ran locally on an Apple M4 Pro (MPS) with HuggingFace `trl`'s `SFTTrainer`.
 

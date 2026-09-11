@@ -23,7 +23,7 @@ Python · PyTorch · HuggingFace Transformers · trl (SFTTrainer) · PEFT (LoRA)
 
 | File | Description |
 |------|-------------|
-| `deep_learning_nonstandard_modalities_2026-07-21.qmd` | Quarto source — full write-up with embedded code |
+| `deep_learning_nonstandard_modalities_2026-09-11.qmd` | Quarto source — full write-up with embedded code |
 | `index.html` | Self-contained rendered report (open in browser) |
 | `images/` | Result figures embedded in the report |
 | `data/README.md` | Dataset download instructions (data files not committed) |
