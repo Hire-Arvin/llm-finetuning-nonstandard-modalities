@@ -8,7 +8,7 @@ A single question — *how far can one architectural idea travel?* — carried f
 
 - **From-scratch deep learning** — CNN, ResNet-18 with residual connections, and a full encoder–decoder Transformer (attention, multi-head, positional encoding) implemented and trained in PyTorch.
 - **Genomics transfer learning** — Fine-tuning DNABERT on k-mer-tokenized sequences to classify DNA by species (human, chimpanzee, dog).
-- **Audio as vision** — Converting waveforms to mel spectrograms and fine-tuning a pretrained ConvNeXt across 10 urban-sound classes, comparing frozen-backbone vs. full fine-tuning.
+- **Audio as vision** — Converting waveforms to mel spectrograms and fine-tuning a pretrained ConvNeXt across 10 urban-sound classes; full fine-tuning reached 88% validation accuracy, vs. 59% with a frozen backbone and 33% from scratch.
 - **LLM fine-tuning & catastrophic-forgetting study** — Adapting Qwen2.5-0.5B with LoRA and partial-layer fine-tuning; likelihood-based multiple-choice evaluation; a held-out design that measures general-knowledge retention; and a 169-question hidden-test comparison against in-context learning.
 
 ## Key Finding
@@ -23,7 +23,7 @@ Python · PyTorch · HuggingFace Transformers · trl (SFTTrainer) · PEFT (LoRA)
 
 | File | Description |
 |------|-------------|
-| `deep_learning_nonstandard_modalities_2026-09-11.qmd` | Quarto source — full write-up with embedded code |
+| `deep_learning_nonstandard_modalities_2026-10-26.qmd` | Quarto source — full write-up with embedded code |
 | `index.html` | Self-contained rendered report (open in browser) |
 | `images/` | Result figures embedded in the report |
 | `data/README.md` | Dataset download instructions (data files not committed) |

@@ -869,6 +869,19 @@ def train_image_classifier(model, optimizer, criterion, device, num_epochs,
     return train_losses, val_losses, train_accuracies, val_accuracies
 ```
 
+### ConvNeXt Results
+
+Each paradigm was trained for 5 epochs with AdamW on the same spectrogram split (349 training clips, 175 validation clips, 10 classes):
+
+| Paradigm | Pretrained weights | Trainable layers | Validation accuracy |
+|---|---|---|---:|
+| Train from scratch | none | all | 32.6% |
+| Frozen backbone | ImageNet | classifier head only | 58.9% |
+| **Full fine-tuning** | **ImageNet** | **all** | **88.0%** |
+| *Random guessing* | — | — | *10.0%* |
+
+Full fine-tuning more than doubled the from-scratch accuracy. On roughly 350 training clips, a randomly initialized ConvNeXt has far too little data to learn useful filters, so it barely beats chance. Starting from ImageNet weights helps even when the backbone is frozen. The ImageNet filters for edges and textures carry over to spectrograms, although they were never trained on audio. Letting every layer adapt closes most of the remaining gap. These features are a strong starting point, but they still need to be tuned to spectrograms rather than natural photos.
+
 ---
 
 ## Part 5: Instruction Fine-Tuning an LLM — Task Gains vs. Catastrophic Forgetting
